@@ -13,7 +13,7 @@ Here you can find the code we use in some of our quantum optimization projects.
 
 ## Use this repository
 If you want to use the code in this repository in your projects, please cite explicitely our work, and
-* Clone the repository with `git clone https://github.com/NesyaLab/qaoa`
+* Clone the repository with `git clone https://github.com/leonardoLavagna/qaoa`
 * Install the requirements with `pip install -r requirements.txt`
 
 For further guidance check the examples in the `documentation` and `tutorials` directories.
