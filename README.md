@@ -9,7 +9,8 @@ Here you can find the code we use in some of our quantum optimization projects.
 * `functions` contains utilities to work with the classes in `classes`, solve the MaxCut problem and othe related tasks.
 * `tutorials` contains a minimal example notebook showing a possible pipeline where the MaxCut problem is solved in a specific instance.
 * `config.py` is a configuration file used to specify some settings (e.g. the number of QAOA layers).
-* `requirements.txt` contains the requirements (install the file before using the code in this repository)
+* `requirements.txt` contains the requirements (install the file before using the code in this repository).
+* * `LICENCE` MIT License.
 
 ## Use this repository
 If you want to use the code in this repository in your projects, please cite explicitely our work, and
