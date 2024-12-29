@@ -18,3 +18,9 @@ If you want to use the code in this repository in your projects, please cite exp
 * Install the requirements with `pip install -r requirements.txt`
 
 For further guidance check the examples in the `documentation` and `tutorials` directories.
+
+## Contributing
+We welcome contributions to enhance the functionality and performance of the models. Please submit pull requests or open issues for any improvements or bug fixes.
+
+## License
+This project is licensed under the MIT License.
