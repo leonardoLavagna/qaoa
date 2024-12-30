@@ -2,8 +2,6 @@ import streamlit as st
 import networkx as nx
 import matplotlib.pyplot as plt
 from classes import Qaoa, Problems
-#import os
-#os.chdir('..')
 
 # Function to create a graph from user input
 def create_graph():
@@ -38,10 +36,10 @@ def solve_maxcut(G, num_nodes):
     st.header("Solve MaxCut with QAOA")
 
     # Create the problem instance using the Problems class
-    problem = Problems(num_nodes, G)
+    problem = Problems.Problems(num_nodes, G)
 
     # Initialize the QAOA class
-    qaoa_solver = Qaoa(problem)
+    qaoa_solver = Qaoa.Qaoa(problem)
 
     # Solve the MaxCut
     maxcut_result = qaoa_solver.solve()
