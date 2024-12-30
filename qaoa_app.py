@@ -10,7 +10,7 @@ from functions import qaoa_optimizers as optims
 
 def create_instance():
     st.header("Create Your QAOA instance")
-    num_nodes = st.number_input("Enter the number of nodes of the graph over which you want to compute the maxcut value:", min_value=2, max_value=20, value=5)
+    num_nodes = st.number_input("Enter the number of nodes of the graph over which you want to compute the maxcut value:", min_value=2, max_value=20, value=4)
     edges_input = st.text_area("Enter the edges (format: 'node1 node2' with a space between nodes)", 
                                placeholder="0 1\n1 2\n2 3\n3 0", 
                                height=200)
@@ -22,7 +22,7 @@ def create_instance():
     G = nx.Graph()
     G.add_edges_from(edges)
     p = st.number_input("Enter the number of layers of the QAOA circuit:", min_value=1, max_value=8, value=1)
-    mixer = st.text_input("Enter the mixer type (answer x,xx,y,yy or xy):")
+    mixer = st.text_input("Enter the mixer type (answer x,xx,y,yy or xy):", max_chars=2, help='x')
     problem = P.Problems(G=G)
     return p, problem, G, mixer
 
