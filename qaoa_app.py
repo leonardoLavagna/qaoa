@@ -27,8 +27,7 @@ def create_instance():
     verbose = st.checkbox("Do you want the verbose version?")
     if verbose:
         st.write("Great!")
-    seed = 123
-    return p, G, mixer, seed, verbose
+    return p, G, mixer, verbose
 
 def plot_graph(G):
     plt.figure(figsize=(6,6))
@@ -38,16 +37,16 @@ def plot_graph(G):
 def solve_maxcut(p, G):
     st.header("Solve MaxCut with QAOA")
     problem = P.Problems(G=G)
-    betas = qaoa_utils.generate_parameters(n=p, k=1, seed=seed)
-    gammas = qaoa_utils.generate_parameters(n=p, k=2, seed=seed)
-    qaoa = Q.Qaoa(p=p, G=G, betas=betas, gammas=gammas, mixer=mixer, seed=seed, verbose=verbose)
+    betas = qaoa_utils.generate_parameters(n=p, k=1)
+    gammas = qaoa_utils.generate_parameters(n=p, k=2)
+    qaoa = Q.Qaoa(p=p, G=G, betas=betas, gammas=gammas, mixer=mixer, verbose=verbose)
     x, f = optims.simple_optimization(qaoa, seed=seed, verbose=verbose)
     st.write("MaxCut Solution:")
     st.write(f"MaxCut Value: -f")
 
 def main():
     st.title("MaxCut Problem Solver with QAOA")
-    p, G, mixer, seed, verbose = create_instance()
+    p, G, mixer, verbose = create_instance()
     if len(G.edges) > 0:
         plot_graph(G)
         if st.button("Solve MaxCut"):
