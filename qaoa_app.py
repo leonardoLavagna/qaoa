@@ -33,12 +33,12 @@ def plot_graph(G):
     st.pyplot(plt)
 
 def solve_maxcut(p, problem, mixer):
-    st.header("Solve MaxCut with QAOA")
+    st.header("Solving MaxCut with QAOA...")
     betas = qaoa_utils.generate_parameters(n=p, k=1)
     gammas = qaoa_utils.generate_parameters(n=p, k=2)
     qaoa = Q.Qaoa(p=p, G=problem, betas=betas, gammas=gammas, mixer=mixer)
     x, f = optims.simple_optimization(qaoa)
-    st.write(f"Inital QAOA angles: betas={betas},gammas={gammas}")
+    st.write(f"Inital QAOA angles: \n\tbetas={betas},\n\tgammas={gammas}")
     st.write(f"Approximate MaxCut Value: {-f}")
     st.write(f"Updated QAOA angles: {x}")
 
