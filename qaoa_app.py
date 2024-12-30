@@ -40,7 +40,7 @@ def solve_maxcut(p, problem, mixer):
     x, f = optims.simple_optimization(qaoa)
     st.write(f"Inital QAOA angles: [{betas[:p]} {gammas[:p]}]")
     st.write(f"Approximate MaxCut Value: {-f}")
-    st.write(f"Updated QAOA angles: [{x[:p]} {x[p:}]")
+    st.write(f"Updated QAOA angles: [{x[:p]} {x[p:]}]")
 
 def main():
     st.title("MaxCut Problem Solver with QAOA")
