@@ -7,7 +7,6 @@ from functions import qaoa_utilities as qaoa_utils
 from functions import maxcut_utilities as mcut_utils
 from functions import qaoa_optimizers as optims
 
-
 def create_instance():
     st.header("Create Your QAOA instance")
     num_nodes = st.number_input("Enter the number of nodes of the graph over which you want to compute the maxcut value:", min_value=2, max_value=20, value=4)
