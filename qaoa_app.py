@@ -24,7 +24,7 @@ def create_instance():
     p = st.number_input("Enter the number of layers of the QAOA circuit:", min_value=1, max_value=8, value=1)
     mixer = st.text_input("Enter the mixer type (answer x,xx,y,yy or xy):")
     problem = P.Problems(G=G)
-    return p, problem, mixer
+    return p, problem, G, mixer
 
 def plot_circuit(p,problem, mixer):
     st.header("Problem instance and associated QAOA circuit")
@@ -49,10 +49,10 @@ def solve_maxcut(p, problem, mixer):
 
 def main():
     st.title("MaxCut Problem Solver with QAOA")
-    p, problem, mixer = create_instance()
+    p, problem, G, mixer = create_instance()
     if len(problem.G.edges) > 0:
         plot_circuit(p,problem, mixer)
-        plot_graph(problem.G)
+        plot_graph(G)
         if st.button("Solve MaxCut"):
             solve_maxcut(p,problem,mixer)
 
