@@ -3,7 +3,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from classes import Qaoa, Problems
 import os
-os.chdir('qaoa')
+os.chdir('..')
 
 # Function to create a graph from user input
 def create_graph():
