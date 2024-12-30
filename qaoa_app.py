@@ -33,7 +33,7 @@ def plot_graph(G):
 def solve_maxcut(p, G):
     st.header("Solve MaxCut with QAOA")
     # Create the problem instance using the Problems class
-    problem = Problems.Problems(Graph=G)
+    problem = Problems.Problems(G=G)
     # Initialize the QAOA class
     qaoa_solver = Qaoa.Qaoa(p=p,Graph=problem)
     # Solve the MaxCut
