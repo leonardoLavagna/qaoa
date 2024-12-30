@@ -6,8 +6,8 @@ from classes import Qaoa, Problems
 # Function to create a graph from user input
 def create_graph():
     st.header("Create Your Graph")
-
     num_nodes = st.number_input("Enter the number of nodes", min_value=2, max_value=20, value=5)
+    p = st.number_input("Enter the number of layers", min_value=1, max_value=8, value=1)
     st.write(f"Graph with {num_nodes} nodes will be created.")
 
     edges_input = st.text_area("Enter the edges (format: 'node1 node2' with a space between nodes)", 
@@ -18,7 +18,6 @@ def create_graph():
         if line.strip():
             node1, node2 = map(int, line.split())
             edges.append((node1, node2))
-
     G = nx.Graph()
     G.add_edges_from(edges)
     return G, num_nodes
@@ -34,16 +33,12 @@ def plot_graph(G):
 # Function to solve MaxCut using QAOA
 def solve_maxcut(G, num_nodes):
     st.header("Solve MaxCut with QAOA")
-
     # Create the problem instance using the Problems class
     problem = Problems.Problems(num_nodes, G)
-
     # Initialize the QAOA class
     qaoa_solver = Qaoa.Qaoa(problem)
-
     # Solve the MaxCut
     maxcut_result = qaoa_solver.solve()
-
     st.write("MaxCut Solution:")
     st.write(f"MaxCut Value: {maxcut_result['cut_value']}")
     st.write(f"Partitioning of nodes: {maxcut_result['partition']}")
@@ -51,10 +46,8 @@ def solve_maxcut(G, num_nodes):
 # Streamlit app layout
 def main():
     st.title("MaxCut Problem Solver with QAOA")
-
     G, num_nodes = create_graph()
-
-    if len(G.edges) > 0:  # Only proceed if graph is created
+    if len(G.edges) > 0:
         plot_graph(G)
         if st.button("Solve MaxCut"):
             solve_maxcut(G, num_nodes)
