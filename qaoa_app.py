@@ -50,8 +50,8 @@ def main():
     st.title("MaxCut Problem Solver with QAOA")
     p, problem, G, mixer = create_instance()
     if len(problem.G.edges) > 0:
-        plot_circuit(p,problem, mixer)
         plot_graph(G)
+        plot_circuit(p,problem, mixer)
         if st.button("Solve MaxCut"):
             solve_maxcut(p,problem,mixer)
 
