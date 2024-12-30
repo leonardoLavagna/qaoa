@@ -47,7 +47,7 @@ def solve_maxcut(p, problem, mixer, verbose):
 def main():
     st.title("MaxCut Problem Solver with QAOA")
     p, G, mixer, verbose = create_instance()
-    if len(G.edges) > 0:
+    if len(G.get_edges) > 0:
         plot_graph(G)
         if st.button("Solve MaxCut"):
             solve_maxcut(p,G,mixer,verbose)
