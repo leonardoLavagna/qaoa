@@ -46,11 +46,11 @@ def solve_maxcut(p, problem, mixer, verbose):
 
 def main():
     st.title("MaxCut Problem Solver with QAOA")
-    p, G, mixer, verbose = create_instance()
-    if len(G.get_edges) > 0:
-        plot_graph(G)
+    p, problem, mixer, verbose = create_instance()
+    if len(problem.G.edges) > 0:
+        plot_graph(problem.G)
         if st.button("Solve MaxCut"):
-            solve_maxcut(p,G,mixer,verbose)
+            solve_maxcut(p,problem,mixer,verbose)
 
 if __name__ == "__main__":
     main()
