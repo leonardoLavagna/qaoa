@@ -37,20 +37,17 @@ def plot_graph(G):
 
 def solve_maxcut(p, G):
     st.header("Solve MaxCut with QAOA")
-    # Create the problem instance using the Problems class
     problem = P.Problems(G=G)
-    # Initialize the QAOA class
     betas = qaoa_utils.generate_parameters(n=p, k=1, seed=seed)
     gammas = qaoa_utils.generate_parameters(n=p, k=2, seed=seed)
     qaoa = Q.Qaoa(p=p, G=G, betas=betas, gammas=gammas, mixer=mixer, seed=seed, verbose=verbose)
-    # Solve the MaxCut
     x, f = optims.simple_optimization(qaoa, seed=seed, verbose=verbose)
     st.write("MaxCut Solution:")
     st.write(f"MaxCut Value: -f")
 
 def main():
     st.title("MaxCut Problem Solver with QAOA")
-    p, G, mixer, seed, verbose = create_graph()
+    p, G, mixer, seed, verbose = create_instance()
     if len(G.edges) > 0:
         plot_graph(G)
         if st.button("Solve MaxCut"):
