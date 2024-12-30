@@ -1,16 +1,18 @@
 import streamlit as st
 import networkx as nx
 import matplotlib.pyplot as plt
-from classes import Qaoa, Problems
+from classes import Qaoa as Q
+from classes import Problems as P
+from functions import qaoa_utilities as qaoa_utils
+from functions import maxcut_utilities as mcut_utils
+from functions import qaoa_optimizers as optims
 
-# Function to create a graph from user input
-def create_graph():
-    st.header("Create Your Graph")
-    num_nodes = st.number_input("Enter the number of nodes", min_value=2, max_value=20, value=5)
-    p = st.number_input("Enter the number of layers", min_value=1, max_value=8, value=1)
-    st.write(f"Graph with {num_nodes} nodes will be created.")
+
+def create_instance():
+    st.header("Create Your QAOA instance")
+    num_nodes = st.number_input("Enter the number of nodes of the graph over which you want to compute the maxcut value:", min_value=2, max_value=20, value=5)
     edges_input = st.text_area("Enter the edges (format: 'node1 node2' with a space between nodes)", 
-                               placeholder="1 2\n2 3\n3 4", 
+                               placeholder="0 1\n1 2\n2 3\n3 0", 
                                height=200)
     edges = []
     for line in edges_input.split('\n'):
@@ -19,39 +21,40 @@ def create_graph():
             edges.append((node1, node2))
     G = nx.Graph()
     G.add_edges_from(edges)
-    return p, G, num_nodes
+    st.write(f"Graph with {num_nodes} nodes will be created.")
+    p = st.number_input("Enter the number of layers of the QAOA circuit:", min_value=1, max_value=8, value=1)
+    mixer = st.text_input("Enter the mixer type (answer x,xx,y,yy or xy):")
+    verbose = st.checkbox("Do you want the verbose version?")
+    if verbose:
+        st.write("Great!")
+    seed = 123
+    return p, G, mixer, seed, verbose
 
-
-# Function to display the graph
 def plot_graph(G):
     plt.figure(figsize=(6,6))
     nx.draw(G, with_labels=True, font_weight='bold', node_color='lightblue', edge_color='gray')
     st.pyplot(plt)
 
-
-# Function to solve MaxCut using QAOA
 def solve_maxcut(p, G):
     st.header("Solve MaxCut with QAOA")
     # Create the problem instance using the Problems class
-    problem = Problems.Problems(G=G)
+    problem = P.Problems(G=G)
     # Initialize the QAOA class
-    qaoa_solver = Qaoa.Qaoa(p=p,G=problem)
+    betas = qaoa_utils.generate_parameters(n=p, k=1, seed=seed)
+    gammas = qaoa_utils.generate_parameters(n=p, k=2, seed=seed)
+    qaoa = Q.Qaoa(p=p, G=G, betas=betas, gammas=gammas, mixer=mixer, seed=seed, verbose=verbose)
     # Solve the MaxCut
-    maxcut_result = qaoa_solver.solve()
+    x, f = optims.simple_optimization(qaoa, seed=seed, verbose=verbose)
     st.write("MaxCut Solution:")
-    st.write(f"MaxCut Value: {maxcut_result['cut_value']}")
-    st.write(f"Partitioning of nodes: {maxcut_result['partition']}")
+    st.write(f"MaxCut Value: -f")
 
-
-# Streamlit app layout
 def main():
     st.title("MaxCut Problem Solver with QAOA")
-    p, G, num_nodes = create_graph()
+    p, G, mixer, seed, verbose = create_graph()
     if len(G.edges) > 0:
         plot_graph(G)
         if st.button("Solve MaxCut"):
             solve_maxcut(p,G)
-
 
 if __name__ == "__main__":
     main()
