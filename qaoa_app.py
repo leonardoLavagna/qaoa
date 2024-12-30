@@ -27,16 +27,16 @@ def create_instance():
     verbose = st.checkbox("Do you want the verbose version?")
     if verbose:
         st.write("Great!")
-    return p, G, mixer, verbose
+    problem = P.Problems(G=G)
+    return p, problem, mixer, verbose
 
 def plot_graph(G):
     plt.figure(figsize=(6,6))
     nx.draw(G, with_labels=True, font_weight='bold', node_color='lightblue', edge_color='gray')
     st.pyplot(plt)
 
-def solve_maxcut(p, G, mixer, verbose):
+def solve_maxcut(p, problem, mixer, verbose):
     st.header("Solve MaxCut with QAOA")
-    problem = P.Problems(G=G)
     betas = qaoa_utils.generate_parameters(n=p, k=1)
     gammas = qaoa_utils.generate_parameters(n=p, k=2)
     qaoa = Q.Qaoa(p=p, G=G, betas=betas, gammas=gammas, mixer=mixer, verbose=verbose)
