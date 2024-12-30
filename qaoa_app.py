@@ -34,7 +34,7 @@ def plot_graph(G):
     nx.draw(G, with_labels=True, font_weight='bold', node_color='lightblue', edge_color='gray')
     st.pyplot(plt)
 
-def solve_maxcut(p, G):
+def solve_maxcut(p, G, mixer, verbose):
     st.header("Solve MaxCut with QAOA")
     problem = P.Problems(G=G)
     betas = qaoa_utils.generate_parameters(n=p, k=1)
@@ -50,7 +50,7 @@ def main():
     if len(G.edges) > 0:
         plot_graph(G)
         if st.button("Solve MaxCut"):
-            solve_maxcut(p,G)
+            solve_maxcut(p,G,mixer,verbose)
 
 if __name__ == "__main__":
     main()
