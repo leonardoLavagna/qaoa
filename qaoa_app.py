@@ -41,8 +41,7 @@ def solve_maxcut(p, problem, mixer, verbose):
     gammas = qaoa_utils.generate_parameters(n=p, k=2)
     qaoa = Q.Qaoa(p=p, G=problem, betas=betas, gammas=gammas, mixer=mixer, verbose=verbose)
     x, f = optims.simple_optimization(qaoa, verbose=verbose)
-    st.write("MaxCut Solution:")
-    st.write(f"MaxCut Value: -f")
+    st.write(f"MaxCut Value: {-f}")
 
 def main():
     st.title("MaxCut Problem Solver with QAOA")
