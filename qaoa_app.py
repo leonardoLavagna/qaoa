@@ -12,7 +12,7 @@ def create_graph():
     num_nodes = st.number_input("Enter the number of nodes", min_value=2, max_value=20, value=5)
     st.write(f"Graph with {num_nodes} nodes will be created.")
 
-    edges_input = st.text_area("Enter the edges (format: 'node1 node2')", 
+    edges_input = st.text_area("Enter the edges (format: 'node1 node2' with a space between nodes)", 
                                placeholder="1 2\n2 3\n3 4", 
                                height=200)
     edges = []
