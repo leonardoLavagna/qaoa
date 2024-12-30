@@ -21,16 +21,18 @@ def create_instance():
             edges.append((node1, node2))
     G = nx.Graph()
     G.add_edges_from(edges)
-    st.write(f"Graph with {num_nodes} nodes will be created.")
     p = st.number_input("Enter the number of layers of the QAOA circuit:", min_value=1, max_value=8, value=1)
     mixer = st.text_input("Enter the mixer type (answer x,xx,y,yy or xy):")
     problem = P.Problems(G=G)
     return p, problem, mixer
 
-def plot_graph(G):
+def plot(p,problem,mixer):
+    st.header("Problem instance and associated QAOA circuit")
     plt.figure(figsize=(6,6))
     nx.draw(G, with_labels=True, font_weight='bold', node_color='lightblue', edge_color='gray')
+    qaoa = Q.Qaoa(p=p, G=problem, mixer=mixer)
     st.pyplot(plt)
+    st.write(print(qaoa.get_circuit()))
 
 def solve_maxcut(p, problem, mixer):
     st.header("Solving MaxCut with QAOA...")
@@ -46,7 +48,7 @@ def main():
     st.title("MaxCut Problem Solver with QAOA")
     p, problem, mixer = create_instance()
     if len(problem.G.edges) > 0:
-        plot_graph(problem.G)
+        plot(p,problem,mixer)
         if st.button("Solve MaxCut"):
             solve_maxcut(p,problem,mixer)
 
