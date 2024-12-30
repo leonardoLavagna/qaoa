@@ -31,7 +31,7 @@ def plot_graph(G):
 
 
 # Function to solve MaxCut using QAOA
-def solve_maxcut(p, G, num_nodes):
+def solve_maxcut(p, G):
     st.header("Solve MaxCut with QAOA")
     # Create the problem instance using the Problems class
     problem = Problems.Problems(Graph=G)
@@ -43,6 +43,7 @@ def solve_maxcut(p, G, num_nodes):
     st.write(f"MaxCut Value: {maxcut_result['cut_value']}")
     st.write(f"Partitioning of nodes: {maxcut_result['partition']}")
 
+
 # Streamlit app layout
 def main():
     st.title("MaxCut Problem Solver with QAOA")
@@ -50,7 +51,8 @@ def main():
     if len(G.edges) > 0:
         plot_graph(G)
         if st.button("Solve MaxCut"):
-            solve_maxcut(G, num_nodes)
+            solve_maxcut(p,G)
+
 
 if __name__ == "__main__":
     main()
