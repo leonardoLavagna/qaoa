@@ -9,7 +9,6 @@ def create_graph():
     num_nodes = st.number_input("Enter the number of nodes", min_value=2, max_value=20, value=5)
     p = st.number_input("Enter the number of layers", min_value=1, max_value=8, value=1)
     st.write(f"Graph with {num_nodes} nodes will be created.")
-
     edges_input = st.text_area("Enter the edges (format: 'node1 node2' with a space between nodes)", 
                                placeholder="1 2\n2 3\n3 4", 
                                height=200)
@@ -20,7 +19,7 @@ def create_graph():
             edges.append((node1, node2))
     G = nx.Graph()
     G.add_edges_from(edges)
-    return G, num_nodes
+    return p, G, num_nodes
 
 
 # Function to display the graph
@@ -47,7 +46,7 @@ def solve_maxcut(p, G):
 # Streamlit app layout
 def main():
     st.title("MaxCut Problem Solver with QAOA")
-    G, num_nodes = create_graph()
+    p, G, num_nodes = create_graph()
     if len(G.edges) > 0:
         plot_graph(G)
         if st.button("Solve MaxCut"):
