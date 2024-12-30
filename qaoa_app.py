@@ -29,7 +29,7 @@ def create_instance():
 def plot(p,problem, mixer):
     st.header("Problem instance and associated QAOA circuit")
     plt.figure(figsize=(6,6))
-    nx.draw(G, with_labels=True, font_weight='bold', node_color='lightblue', edge_color='gray')
+    nx.draw(problem.G, with_labels=True, font_weight='bold', node_color='lightblue', edge_color='gray')
     qaoa = Q.Qaoa(p=p, G=problem, mixer=mixer)
     st.pyplot(plt)
     st.write(qaoa.get_circuit())
