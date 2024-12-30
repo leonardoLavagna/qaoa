@@ -22,7 +22,7 @@ def create_instance():
     G = nx.Graph()
     G.add_edges_from(edges)
     p = st.number_input("Enter the number of layers of the QAOA circuit:", min_value=1, max_value=8, value=1)
-    mixer = st.text_input("Enter the mixer type (answer x,xx,y,yy or xy):", max_chars=2, help='x')
+    mixer = st.text_input("Enter the mixer type (answer x,xx,y,yy or xy):", "x", max_chars=2)
     problem = P.Problems(G=G)
     return p, problem, G, mixer
 
