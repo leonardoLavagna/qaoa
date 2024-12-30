@@ -24,32 +24,31 @@ def create_instance():
     st.write(f"Graph with {num_nodes} nodes will be created.")
     p = st.number_input("Enter the number of layers of the QAOA circuit:", min_value=1, max_value=8, value=1)
     mixer = st.text_input("Enter the mixer type (answer x,xx,y,yy or xy):")
-    verbose = st.checkbox("Do you want the verbose version?")
-    if verbose:
-        st.write("Great!")
     problem = P.Problems(G=G)
-    return p, problem, mixer, verbose
+    return p, problem, mixer
 
 def plot_graph(G):
     plt.figure(figsize=(6,6))
     nx.draw(G, with_labels=True, font_weight='bold', node_color='lightblue', edge_color='gray')
     st.pyplot(plt)
 
-def solve_maxcut(p, problem, mixer, verbose):
+def solve_maxcut(p, problem, mixer):
     st.header("Solve MaxCut with QAOA")
     betas = qaoa_utils.generate_parameters(n=p, k=1)
     gammas = qaoa_utils.generate_parameters(n=p, k=2)
-    qaoa = Q.Qaoa(p=p, G=problem, betas=betas, gammas=gammas, mixer=mixer, verbose=verbose)
-    x, f = optims.simple_optimization(qaoa, verbose=verbose)
-    st.write(f"MaxCut Value: {-f}")
+    qaoa = Q.Qaoa(p=p, G=problem, betas=betas, gammas=gammas, mixer=mixer)
+    x, f = optims.simple_optimization(qaoa)
+    st.write(f"Inital QAOA angles: betas={betas},gammas={gammas}")
+    st.write(f"Approximate MaxCut Value: {-f}")
+    st.write(f"Updated QAOA angles: {x}")
 
 def main():
     st.title("MaxCut Problem Solver with QAOA")
-    p, problem, mixer, verbose = create_instance()
+    p, problem, mixer = create_instance()
     if len(problem.G.edges) > 0:
         plot_graph(problem.G)
         if st.button("Solve MaxCut"):
-            solve_maxcut(p,problem,mixer,verbose)
+            solve_maxcut(p,problem,mixer)
 
 if __name__ == "__main__":
     main()
