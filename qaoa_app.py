@@ -31,7 +31,7 @@ def create_instance():
 
 def plot_circuit_and_graph(p, problem, mixer):
     st.header("Problem instance and associated QAOA circuit")
-    st.write(f"**{Graph instance}")
+    st.write(f"**{Graph instance}**")
     plt.figure(figsize=(6,6))
     nx.draw(problem.G, with_labels=True, font_weight='bold', node_color='lightblue', edge_color='gray')
     st.pyplot(plt)
