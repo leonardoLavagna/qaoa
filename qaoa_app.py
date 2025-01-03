@@ -31,7 +31,7 @@ def plot_circuit_and_graph(p, problem, mixer):
     nx.draw(problem.G, with_labels=True, font_weight='bold', node_color='lightblue', edge_color='gray')
     st.pyplot(plt)
     qaoa = Q.Qaoa(p=p, G=problem, mixer=mixer)
-    st.write(f"\n {qaoa.get_circuit()}")
+    st.write(qaoa.get_circuit())
 
 def solve_maxcut(p, problem, mixer):
     st.header("Solving MaxCut with QAOA...")
