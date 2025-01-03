@@ -7,6 +7,7 @@ from functions import qaoa_utilities as qaoa_utils
 from functions import maxcut_utilities as mcut_utils
 from functions import qaoa_optimizers as optims
 from qiskit.visualization import plot_histogram
+from qiskit.visualization import circuit_drawer
 from qiskit import transpile
 from qiskit_aer import Aer
 
@@ -34,7 +35,8 @@ def plot_circuit_and_graph(p, problem, mixer):
     nx.draw(problem.G, with_labels=True, font_weight='bold', node_color='lightblue', edge_color='gray')
     st.pyplot(plt)
     qaoa = Q.Qaoa(p=p, G=problem, mixer=mixer)
-    st.write(qaoa.get_circuit())
+    circuit_fig = circuit_drawer(qaoa.get_circuit(), output='mpl', style={'dpi': 300})
+    st.pyplot(circuit_fig)
 
 def get_partitions_from_solution(G, solution):
     partition_1 = [node for node, bit in enumerate(solution) if bit == '0']
