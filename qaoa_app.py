@@ -57,7 +57,7 @@ def plot_graph_partition(problem, p, mixer, x):
     most_frequent_solution = max(counts, key=counts.get)
     partition_1, partition_2 = get_partitions_from_solution(qaoa.G, most_frequent_solution)
     plt.figure(figsize=(6, 6))
-    node_colors = ['lightblue' if node in partition_1 else 'orange' for node in qaoa.G.nodes()]
+    node_colors = ['lightblue' if node in partition_1 else 'orange' for node in qaoa.G.get_nodes()]
     nx.draw(
         qaoa.G,
         with_labels=True,
