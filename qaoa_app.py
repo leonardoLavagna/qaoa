@@ -32,7 +32,7 @@ def plot_circuit_and_graph(p, problem, mixer):
     st.pyplot(plt)
     qaoa = Q.Qaoa(p=p, G=problem, mixer=mixer)
     st.write("\n")
-    st.write(qaoa.get_circuit().draw())
+    st.write(qaoa.get_circuit())
 
 def solve_maxcut(p, problem, mixer):
     st.header("Solving MaxCut with QAOA...")
