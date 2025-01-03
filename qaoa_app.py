@@ -46,7 +46,7 @@ def get_partitions_from_solution(G, solution):
     return partition_1, partition_2
 
 def plot_graph_partition(problem, p, mixer, x):
-    st.header("MaxCut graph partition and solutions' spectrum")
+    st.write("MaxCut graph partition")
     plt.figure(figsize=(6,6))
     betas = x[:p]
     gammas = x[p:]
@@ -71,6 +71,7 @@ def plot_graph_partition(problem, p, mixer, x):
         edge_color='gray'
     )
     st.pyplot(plt)
+    st.write("Spectrum of the solutions")
     st.write(plot_histogram(counts))
 
 def solve_maxcut(p, problem, mixer):
