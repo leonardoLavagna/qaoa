@@ -37,7 +37,7 @@ def plot_circuit_and_graph(p, problem, mixer):
     st.pyplot(plt)
     qaoa = Q.Qaoa(p=p, G=problem, mixer=mixer)
     circuit_fig = circuit_drawer(qaoa.get_circuit(), output='mpl', style={'dpi': 300})
-    st.write(f"QAOA circuit with given mixer {x}")
+    st.write(f"QAOA circuit with given mixer {mixer}")
     st.pyplot(circuit_fig)
 
 def get_partitions_from_solution(G, solution):
