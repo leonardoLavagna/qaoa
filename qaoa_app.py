@@ -6,6 +6,9 @@ from classes import Problems as P
 from functions import qaoa_utilities as qaoa_utils
 from functions import maxcut_utilities as mcut_utils
 from functions import qaoa_optimizers as optims
+from qiskit.visualization import plot_histogram
+from qiskit import transpile
+from qiskit_aer import Aer
 
 def create_instance():
     st.header("Create Your QAOA instance")
@@ -33,6 +36,21 @@ def plot_circuit_and_graph(p, problem, mixer):
     qaoa = Q.Qaoa(p=p, G=problem, mixer=mixer)
     st.write(qaoa.get_circuit())
 
+def plot_graph_partition(problem, p, mixer, x):
+    st.header("MaxCut graph partition and solutions' spectrum")
+    plt.figure(figsize=(6,6))
+    betas = x[:p]
+    gammas = x[p:]
+    init_point = list(betas) + list(gammas)
+    qaoa = Q.Qaoa(p=p, G=problem, betas=betas, gammas=gammas, mixer=mixer)
+    G = qaoa.G
+    qc = qaoa.get_circuit()
+    qc = qc.assign_parameters(init_point)
+    t_qc = transpile(qc, backend=backend)
+    job = backend.run(t_qc, shots=shots)
+    counts = job.result().get_counts(qc)
+    st.write(counts)
+
 def solve_maxcut(p, problem, mixer):
     st.header("Solving MaxCut with QAOA...")
     betas = qaoa_utils.generate_parameters(n=p, k=1)
@@ -42,7 +60,8 @@ def solve_maxcut(p, problem, mixer):
     st.write(f"Inital QAOA angles: [{betas[:p]} {gammas[:p]}]")
     st.write(f"Approximate MaxCut Value: {-f}")
     st.write(f"Updated QAOA angles: [{x[:p]} {x[p:]}]")
-
+    plot_graph_partition(problem, p, mixer, x)
+    
 def main():
     st.title("MaxCut Problem Solver with QAOA")
     p, problem, G, mixer = create_instance()
