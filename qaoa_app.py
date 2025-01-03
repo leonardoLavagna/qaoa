@@ -84,7 +84,7 @@ def solve_maxcut(p, problem, mixer):
     st.write(f"**{'Approximate MaxCut Value:'}** {-f}")
     st.write(f"**{'Updated QAOA angles:'}** [{x[:p]} {x[p:]}]")
     plot_graph_partition(problem, p, mixer, x)
-    st.write(f"**{'...Succes!:'}** [{x[:p]} {x[p:]}]")
+    st.header("...Succes!")
     
 def main():
     st.title("MaxCut Problem Solver with QAOA")
