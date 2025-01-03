@@ -50,7 +50,7 @@ def plot_graph_partition(problem, p, mixer, x):
     t_qc = transpile(qc, backend=backend)
     job = backend.run(t_qc)
     counts = job.result().get_counts(qc)
-    st.write(counts)
+    st.write(plot_histogram(counts))
 
 def solve_maxcut(p, problem, mixer):
     st.header("Solving MaxCut with QAOA...")
