@@ -12,7 +12,7 @@ from qiskit import transpile
 from qiskit_aer import Aer
 
 def create_instance():
-    st.header("Create Your QAOA instance")
+    st.header("Create a problem instance")
     num_nodes = st.number_input("Enter the number of nodes of the graph over which you want to compute the maxcut value:", min_value=2, max_value=20, value=4)
     edges_input = st.text_area("Enter the edges (format: 'node1 node2' with a space between nodes)", 
                                placeholder="0 1\n1 2\n2 3\n3 0", 
@@ -46,7 +46,7 @@ def get_partitions_from_solution(G, solution):
     return partition_1, partition_2
 
 def plot_graph_partition(problem, p, mixer, x):
-    st.write("**{'MaxCut graph partition'}**")
+    st.write(f"**{'MaxCut graph partition'}**")
     plt.figure(figsize=(6,6))
     betas = x[:p]
     gammas = x[p:]
@@ -71,7 +71,7 @@ def plot_graph_partition(problem, p, mixer, x):
         edge_color='gray'
     )
     st.pyplot(plt)
-    st.write("**{'Spectrum of the solutions'}**")
+    st.write(f"**{'Spectrum of the solutions'}**")
     st.write(plot_histogram(counts))
 
 def solve_maxcut(p, problem, mixer):
@@ -84,6 +84,7 @@ def solve_maxcut(p, problem, mixer):
     st.write(f"**{'Approximate MaxCut Value:'}** {-f}")
     st.write(f"**{'Updated QAOA angles:'}** [{x[:p]} {x[p:]}]")
     plot_graph_partition(problem, p, mixer, x)
+    st.write(f"**{'...Succes!:'}** [{x[:p]} {x[p:]}]")
     
 def main():
     st.title("MaxCut Problem Solver with QAOA")
