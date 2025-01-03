@@ -46,7 +46,7 @@ def plot_graph_partition(problem, p, mixer, x):
     G = qaoa.G
     qc = qaoa.get_circuit()
     qc = qc.assign_parameters(init_point)
-    t_qc = transpile(qc, backend=backend)
+    t_qc = transpile(qc, backend=Aer.get_backend("aer_simulator"))
     job = backend.run(t_qc, shots=shots)
     counts = job.result().get_counts(qc)
     st.write(counts)
