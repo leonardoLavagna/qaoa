@@ -37,7 +37,7 @@ def plot_circuit_and_graph(p, problem, mixer):
     st.pyplot(plt)
     qaoa = Q.Qaoa(p=p, G=problem, mixer=mixer)
     circuit_fig = circuit_drawer(qaoa.get_circuit(), output='mpl', style={'dpi': 300})
-    st.write(f"QAOA circuit with given mixer {mixer}")
+    st.write(f"**{'QAOA circuit with given mixer'}** {mixer}")
     st.pyplot(circuit_fig)
 
 def get_partitions_from_solution(G, solution):
@@ -46,7 +46,7 @@ def get_partitions_from_solution(G, solution):
     return partition_1, partition_2
 
 def plot_graph_partition(problem, p, mixer, x):
-    st.write("MaxCut graph partition")
+    st.write("**{'MaxCut graph partition'}**")
     plt.figure(figsize=(6,6))
     betas = x[:p]
     gammas = x[p:]
@@ -71,7 +71,7 @@ def plot_graph_partition(problem, p, mixer, x):
         edge_color='gray'
     )
     st.pyplot(plt)
-    st.write("Spectrum of the solutions")
+    st.write("**{'Spectrum of the solutions'}**")
     st.write(plot_histogram(counts))
 
 def solve_maxcut(p, problem, mixer):
@@ -80,9 +80,9 @@ def solve_maxcut(p, problem, mixer):
     gammas = qaoa_utils.generate_parameters(n=p, k=2)
     qaoa = Q.Qaoa(p=p, G=problem, betas=betas, gammas=gammas, mixer=mixer)
     x, f = optims.simple_optimization(qaoa)
-    st.write(f"Inital QAOA angles: [{betas[:p]} {gammas[:p]}]")
-    st.write(f"Approximate MaxCut Value: {-f}")
-    st.write(f"Updated QAOA angles: [{x[:p]} {x[p:]}]")
+    st.write(f"**{'Inital QAOA angles:'}** [{betas[:p]} {gammas[:p]}]")
+    st.write(f"**{'Approximate MaxCut Value:'}** {-f}")
+    st.write(f"**{'Updated QAOA angles:'}** [{x[:p]} {x[p:]}]")
     plot_graph_partition(problem, p, mixer, x)
     
 def main():
