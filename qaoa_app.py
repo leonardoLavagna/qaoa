@@ -25,15 +25,13 @@ def create_instance():
     problem = P.Problems(G=G)
     return p, problem, G, mixer
 
-def plot_circuit(p,problem, mixer):
+def plot_circuit_and_graph(p,problem, mixer):
     st.header("Problem instance and associated QAOA circuit")
-    qaoa = Q.Qaoa(p=p, G=problem, mixer=mixer)
-    st.write(qaoa.get_circuit().draw())
-
-def plot_graph(G):
     plt.figure(figsize=(6,6))
     nx.draw(G, with_labels=True, font_weight='bold', node_color='lightblue', edge_color='gray')
     st.pyplot(plt)
+    qaoa = Q.Qaoa(p=p, G=problem, mixer=mixer)
+    st.write(qaoa.get_circuit().draw())
 
 def solve_maxcut(p, problem, mixer):
     st.header("Solving MaxCut with QAOA...")
@@ -50,7 +48,7 @@ def main():
     p, problem, G, mixer = create_instance()
     if len(problem.G.edges) > 0:
         plot_graph(G)
-        plot_circuit(p,problem, mixer)
+        plot_circuit_and_graph(p,problem, mixer)
         if st.button("Solve MaxCut"):
             solve_maxcut(p,problem,mixer)
 
