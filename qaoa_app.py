@@ -36,6 +36,11 @@ def plot_circuit_and_graph(p, problem, mixer):
     qaoa = Q.Qaoa(p=p, G=problem, mixer=mixer)
     st.write(qaoa.get_circuit())
 
+def get_partitions_from_solution(G, solution):
+    partition_1 = [node for node, bit in enumerate(solution) if bit == '0']
+    partition_2 = [node for node, bit in enumerate(solution) if bit == '1']
+    return partition_1, partition_2
+
 def plot_graph_partition(problem, p, mixer, x):
     st.header("MaxCut graph partition and solutions' spectrum")
     plt.figure(figsize=(6,6))
@@ -50,6 +55,18 @@ def plot_graph_partition(problem, p, mixer, x):
     t_qc = transpile(qc, backend=backend)
     job = backend.run(t_qc)
     counts = job.result().get_counts(qc)
+    most_frequent_solution = max(counts, key=counts.get)
+    partition_1, partition_2 = get_partitions_from_solution(G, most_frequent_solution)
+    plt.figure(figsize=(6, 6))
+    node_colors = ['lightblue' if node in partition_1 else 'orange' for node in G.nodes()]
+    nx.draw(
+        G,
+        with_labels=True,
+        font_weight='bold',
+        node_color=node_colors,
+        edge_color='gray'
+    )
+    st.pyplot(plt)
     st.write(plot_histogram(counts))
 
 def solve_maxcut(p, problem, mixer):
