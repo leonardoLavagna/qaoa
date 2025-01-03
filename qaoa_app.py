@@ -48,7 +48,6 @@ def plot_graph_partition(problem, p, mixer, x):
     gammas = x[p:]
     init_point = list(betas) + list(gammas)
     qaoa = Q.Qaoa(p=p, G=problem, betas=betas, gammas=gammas, mixer=mixer)
-    G = qaoa.G
     qc = qaoa.get_circuit()
     qc = qc.assign_parameters(init_point)
     backend = Aer.get_backend("aer_simulator")
@@ -58,9 +57,9 @@ def plot_graph_partition(problem, p, mixer, x):
     most_frequent_solution = max(counts, key=counts.get)
     partition_1, partition_2 = get_partitions_from_solution(G, most_frequent_solution)
     plt.figure(figsize=(6, 6))
-    node_colors = ['lightblue' if node in partition_1 else 'orange' for node in G.nodes()]
+    node_colors = ['lightblue' if node in partition_1 else 'orange' for node in qaoa.G.nodes()]
     nx.draw(
-        G,
+        qaoa.G,
         with_labels=True,
         font_weight='bold',
         node_color=node_colors,
