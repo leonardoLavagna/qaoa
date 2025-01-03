@@ -31,11 +31,13 @@ def create_instance():
 
 def plot_circuit_and_graph(p, problem, mixer):
     st.header("Problem instance and associated QAOA circuit")
+    st.write("Graph instance")
     plt.figure(figsize=(6,6))
     nx.draw(problem.G, with_labels=True, font_weight='bold', node_color='lightblue', edge_color='gray')
     st.pyplot(plt)
     qaoa = Q.Qaoa(p=p, G=problem, mixer=mixer)
     circuit_fig = circuit_drawer(qaoa.get_circuit(), output='mpl', style={'dpi': 300})
+    st.write(f"QAOA circuit with given mixer {x}")
     st.pyplot(circuit_fig)
 
 def get_partitions_from_solution(G, solution):
