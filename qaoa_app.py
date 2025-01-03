@@ -28,7 +28,7 @@ def create_instance():
 def plot_circuit(p,problem, mixer):
     st.header("Problem instance and associated QAOA circuit")
     qaoa = Q.Qaoa(p=p, G=problem, mixer=mixer)
-    qaoa.get_circuit().draw()
+    st.write(qaoa.get_circuit().draw())
 
 def plot_graph(G):
     plt.figure(figsize=(6,6))
