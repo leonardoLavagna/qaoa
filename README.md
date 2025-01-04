@@ -1,5 +1,5 @@
 # qaoa
-Implementation of the Quantum Approximate Optimization Algorithm (QAOA) for the [Maximum Cut (MaxCut) problem](https://en.wikipedia.org/wiki/Maximum_cut) with [Qiskit](https://www.ibm.com/quantum/qiskit)
+Implementation of the Quantum Approximate Optimization Algorithm (QAOA) for the [Maximum Cut (MaxCut) problem](https://en.wikipedia.org/wiki/Maximum_cut) with [Qiskit](https://www.ibm.com/quantum/qiskit) in a flexible and customizable framework. 
 
 ## What's in here?
 Here you can find the code we use in some of our quantum optimization projects.
