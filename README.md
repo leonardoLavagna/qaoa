@@ -25,3 +25,18 @@ We welcome contributions to enhance the functionality and performance of the mod
 
 ## License
 This project is licensed under the MIT License.
+
+## Citation
+Cite this repository or one of the associated papers, such as:
+
+```
+@misc{Lav24,
+      title={On the Effects of Small Graph Perturbations in the MaxCut Problem by QAOA}, 
+      author={Leonardo Lavagna and Simone Piperno and Andrea Ceschini and Massimo Panella},
+      year={2024},
+      eprint={2408.15413},
+      archivePrefix={arXiv},
+      primaryClass={quant-ph},
+      url={https://arxiv.org/abs/2408.15413}, 
+}
+  ```
