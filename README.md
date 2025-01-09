@@ -37,6 +37,5 @@ Cite this repository or one of the associated papers, such as:
       eprint={2408.15413},
       archivePrefix={arXiv},
       primaryClass={quant-ph},
-      url={https://arxiv.org/abs/2408.15413}, 
-}
+      url={https://arxiv.org/abs/2408.15413}}
   ```
