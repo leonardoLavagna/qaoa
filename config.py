@@ -14,6 +14,9 @@ from qiskit_aer import Aer
 #num_graphs (int): The number of graph instances to be considered
 num_graphs = 16
 
+# idx (int) an index selecting a sample graph 
+idx = 0
+
 #p (int): The number of qaoa layers.
 p = 8
 
